@@ -1,3 +1,4 @@
+
 persianNumbers = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
 englishNumbers = ['0','1','2','3','4','5','6','7','8','9'];
 var myDate = [];
@@ -276,33 +277,35 @@ var Decoding = function(str){
 
 
 
-  const request = indexedDB.open('myDatabase', 1);
-  request.onsuccess = function(event) {
-  const db = event.target.result;
-  const transaction = db.transaction('codes', 'readonly');
-  const objectStore = transaction.objectStore('codes');
- 
+var readCodes = function(){
+    const request = indexedDB.open('myDatabase', 1);
+    request.onsuccess = function(event) {
+    const db = event.target.result;
+    const transaction = db.transaction('codes', 'readonly');
+    const objectStore = transaction.objectStore('codes');
+    
 
-  objectStore.openCursor().onsuccess = function(event) {
-    const cursor = event.target.result;
+    objectStore.openCursor().onsuccess = function(event) {
+        const cursor = event.target.result;
 
-    if (cursor) {
-      records.push(cursor.value.value);
-      cursor.continue();
-    } else {
-      console.log('تمام رکوردها با موفقیت خوانده شدند');
-      Start_function();
-    }
-  };
+        if (cursor) {
+        records.push(cursor.value.value);
+        cursor.continue();
+        } else {
+        console.log('تمام رکوردها با موفقیت خوانده شدند');
+        Start_function();
+        }
+    };
 
-  transaction.oncomplete = function(event) {
-    db.close();
-  };
-};
+    transaction.oncomplete = function(event) {
+        db.close();
+    };
+    };
 
-request.onerror = function(event) {
-  console.error('خطا در ایجاد پایگاه داده', event.target.error);
-};
+    request.onerror = function(event) {
+    console.error('خطا در ایجاد پایگاه داده', event.target.error);
+    };
+}
 
 
 
@@ -321,5 +324,78 @@ var Start_function = function(){
     custom_receive.innerHTML = 'نوبت انتخابی شما  : ' + 
                                 getNameOf(Year,Month,Day);
                                 
-
+                                fetch('https://api.ipify.org/?format=json')
+                                .then(response => response.json())
+                                .then(data => console.log(data.ip));
 }
+
+
+
+
+
+function test11(value,x){
+var text1 = document.getElementById('text'+x)
+text1.innerHTML = value;
+var test = document.getElementById('test'+x);
+test.innerHTML = '';
+var s = '140'+(x%2+1)+'/0'+(x%9+1)+'/'+(x%21+10);
+var a = '';
+for(var x=0;x<s.length;x++){
+    if(s[x] === '/'){
+        a += '/';
+    }else{
+        var n = parseInt(s[x]);
+        a += persianNumbers[n];
+    }
+}
+test.innerHTML = a;
+}
+var names = ['کمال محمدی','مرتضی اصغری','فاطمه امینی','هلیا','سعید'];
+const colors = ["#800000", "#8B4513", "#A0522D", "#A52A2A", "#B22222", "#CD5C5C", "#D2691E", "#D2B48C",
+ "#DC143C", "#FF4500", "#FF6347", "#FF7F50", "#FF8C69", "#FFA07A", "#FFA500"];
+var comments = ['ار لیفت با نخ پیش ایشون نتیجه رضایت بخشی داشت. دکتر با حوصله و وقتی ک میذاره به آدم آرامش میده. رفتار محترمانه ایشون و کادر هم خیلی موثر بوده. تو مراجعات بعدی هم پیگیری خوبی داشتن. در کل به دیگران توصیه می کنم برای لیفت با نخ به دیگران توصیه می کنم. چون نتیجه کار واقعا خوب بود. کیفیت نخ اوریجینال هم عااااالی بود. محیط خوبی هم بود. درسته ک نوبت دکتر هر هفته نمی تونیم بگیریم اما ارزش انتظار کشیدن را داره. بنظرم دکتر شاهوردی به خاطر اینکه متد های به روز دنیا را دنبال می کنه تو کارش موفقه. واقعا دانش پزشک در کنار مهارت و اخلاق و پیگیری بیمار بسیار قابل احترام هست. من که خیلی ازشون تشکر می کنم',
+'پوسته ریزی سر منو دکتر با یه داروی ترکیبی طی دو هفته درمان کرد. منطقه ما گرم و شرجی هست و پزشک های زیادی واسه این مشکل مراجعه داشتم. اذیت بودم. خب خدا رو شکر از اینکه اومدم تهران و درمان شدم واقعا راصی ام. دکتر شاه وردی همین ک با یه داروی ترکیبی بعد این همه مراجعه به پزشک های دیگه منو درمان کرد به دیگران توصیه می کنم، اما خب مشخصه این همه کامنت بیمارها هم نشون میده ک عملکرد و تشخیص خیلی خوبی داره. من به بقیه توصیه می کنم به خصوص جنوبی های خونگرم.',
+'دخترم و پسرم هر دو جوش های ریزی از بچگی روی صورت و بازو داشتن. همیشه نگران بودم و گاهی بهتر و گاهی بدتر می شدند. پسرم 9 ساله شده بود و می گفتن حساسیت هست. تا اینکه یکی از دوستان دکتر شاه وردی را بهم معرفی کرد. ایشون تشخیص دادند ک ناشی از خشکی پوست بوده و تنها نکات مراقبت پوست خشک را دادند و گفتند تا سنین نوجوانی معمولا برطرف میشه. خدا رو شکر که با ایشون اشنا شدیم و با تشخیص صحیح بعد این همه مدت شرایط ما خوب شد.',
+'قای دکتر فوق العاده ان.باسواد،با اخلاق،حرفه ای… من تزریق فیلر انجام دادم تو کلینیک اوان وناحیه چانه عفونت کرد…اونقدر وحشتناک بود که درمان هیچ دکتری جواب نمیداد.تنها دکتری که واقعا دلسوز و صبور و متخصص بودن و کمکم کردن عفونت کنترل شه دکتر شاهوردی عزیز بودن … درمان من کامل نشده هنوز ولی خداروشکر که ایشونو تونستم پیدا کنم…',
+'برای برداشتن ضایعات پوستی مثل خال گوشتی مراجعه کردم. نگران بودم. اما ایشون با متانت نام علمی و روند درمان با لیزر را برام تشریح کرد. خیلی استرس داشتم اما دیدم چقدر سریع و با آرامش انجام شد. در مراجعات بعدی هم خودشون ب یاد داشتن ک تا کنون چه داروهایی داشت که خب این نشان از تمرکز پزشک بر بیمارها هست.']
+
+for(var x=1;x<100;x++){
+var body = document.getElementById('body');
+var five = Math.floor(Math.random() * 5);
+var name_user = names[five];
+var title = name_user[0];
+var color_title = colors[Math.floor(Math.random() * 15)];
+var text = comments[five];
+
+var content = ' <div id="comment1" style="background-color: white;width: 44%;margin-right: 6%;padding: 0.5% 0 0.5% 0;'+
+'display: grid;grid-template-columns: repeat(1,1fr);border-top: 1px solid rgba(0, 0, 0, 0.2);">'+
+'<div>'+
+ '   <div style="float: right; background-color: '+color_title+';border-radius: 100%;font-size: 1vw;'+
+  '  text-align: center;font-weight: 400;color: white;padding: 2% 3% 2% 3%;margin-right:2%;">'+
+   title+
+   ' </div>'+
+   ' <div style="float: right;margin: 0.5% 1% 0 0;">'+
+   '<div style="font-size: 0.8vw;font-weight: 800;">'+
+    name_user+
+    '</div>'+
+    '<div style="font-size: 0.8vw;" id="test'+x+'">'+
+     '   1402/07/03'+
+    '</div>'+
+    '</div>'+
+    '<div style="font-size:0.7vw;border-radius:0.5rem;background-color:rgb(235,235,240);;float:right;'+
+    'font-weight:600;color:rgba(0,0,0,0.5);margin:0.5% 1% 0 0;padding:0.5% 1% 0.5% 1%;">'+
+    'ویزیت شده'+
+    '</div>'+
+    '<a href="https://t.me/share/url?url=[127.0.0.1]&text='+text+'" target="_blank">'+
+    '<img src="./images/more.png" alt="" style="float: left;width: 2.5%;margin: 1% 0 0 1%;cursor: pointer;">'+
+    '</a>'+
+'</div>'+
+
+'<div id="text'+x+'" style="background-color: white;width: 88%;padding: 1%;font-size: 0.9vw;margin:2% 3% 0 0;"></div>'+
+'</div>'
+
+body.innerHTML += content;
+test11(comments[five],x)
+}
+
+readCodes();
