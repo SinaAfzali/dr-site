@@ -230,13 +230,6 @@ function selected(key,value){
 
 
 
-class Code{
-    constructor(key,value,id){
-        this.key = key;
-        this.value = value;
-        this.id = id;
-    }
-}
 
 var records = [];
 
