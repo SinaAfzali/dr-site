@@ -11,6 +11,71 @@ var Day = 0;
 
 
 
+function generateRandomString() {
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+  var length = 6;
+  var randomString = '';
+
+  for (var i = 0; i < length; i++) {
+    var randomIndex = Math.floor(Math.random() * characters.length);
+    randomString += characters.charAt(randomIndex);
+  }
+
+  return randomString;
+}
+
+
+class Code{
+    constructor(key,value,id){
+        this.key = key;
+        this.value = value;
+        this.id = id;
+    }
+}
+
+
+
+
+var request = window.indexedDB.open("myDatabase_159632478", 1);
+
+request.onupgradeneeded = function(event) {
+  var db = event.target.result;
+  var objectStore = db.createObjectStore("codes_159632478", { keyPath: "id" });
+  objectStore.createIndex("keyIndex", "key", { unique: false });
+};
+
+for(var i=0;i<120;i++){
+    
+var code = new Code(parseInt(i%10),generateRandomString(), i);
+
+var request = window.indexedDB.open("myDatabase_159632478", 1);
+request.onsuccess = function(event) {
+  var db = event.target.result;
+  var transaction = db.transaction(["codes_159632478"], "readwrite");
+  var objectStore = transaction.objectStore("codes_159632478");
+
+  var request = objectStore.add(code);
+
+  request.onsuccess = function(event) {
+    console.log("code added successfully");
+  };
+
+  request.onerror = function(event) {
+    console.log("Error adding code");
+  };
+};
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -290,11 +355,11 @@ var Decoding = function(str){
 
 
 var readCodes = function(){
-    const request = indexedDB.open('myDatabase', 1);
+    const request = indexedDB.open('myDatabase_159632478', 1);
     request.onsuccess = function(event) {
     const db = event.target.result;
-    const transaction = db.transaction('codes', 'readonly');
-    const objectStore = transaction.objectStore('codes');
+    const transaction = db.transaction('codes_159632478', 'readonly');
+    const objectStore = transaction.objectStore('codes_159632478');
     
 
     objectStore.openCursor().onsuccess = function(event) {
