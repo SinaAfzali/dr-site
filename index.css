@@ -1,0 +1,76 @@
+body{
+    background-image: url('./images/background.jpg');
+    background-size: 300%;
+    font-family: 'Iran Sans', sans-serif;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+}
+
+.dr-face-image{
+    float: right;
+    border-radius: 100%;
+    margin: 2% 5% 1% 2%;
+    width: 20%;
+    height: 8vw;
+}
+
+.dr-section1{
+    width: 40%;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    float: right;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1rem;
+    margin-right: 6%;
+}
+
+.dr-section2{
+    width: 40%;
+    height: 100%;
+    float: left;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    margin-left: 6%;
+}
+.dr-section3{
+    float: right;
+    width: 40%;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    background-color: rgb(255, 255, 255);
+    border-radius: 1rem;
+    margin-right: 6%;
+    margin-top: 1%;
+}
+.dr-section4{
+    width:40%;
+    float: left;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    background-color: rgb(255, 255, 255);
+    background-color: white;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    margin-left: 6%;
+}
+
+
+
+.hand-icon,.hand-icon1 {
+    cursor: pointer;
+}
+  
+button {
+    cursor: pointer;
+}
+
+
+select[id*="select"]{
+    width: 80%;
+    font-size: 1.2vw;
+    margin: 5% 15% 0 0;
+}
+
